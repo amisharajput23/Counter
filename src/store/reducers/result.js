@@ -1,9 +1,15 @@
-import * as actionTypes from '../actions/actions';
-
+import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility.js';
 
 const initialState = {
     
     results: []
+};
+
+
+const deleteResult = (state, action ) => {
+    const updatedArray = state.results.filter(result => result.id !== action.id);
+    return updateObject (state,{results: updatedArray});
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,24 +18,17 @@ const reducer = (state = initialState, action) => {
      
 
                 case actionTypes.STORE_RESULT:
-                    return{
-                       ...state,
-                       //to update an array immutably using concat
-                       results: state.results.concat({ id: new Date(), value: action.result}) //returns a new array + the arg added to concat; retruns new array with all the properties of old and new state 
-                       //we could have used push() but this manipulates the original value
-                       //
-                    }
+                    //change data
+                    return updateObject (state, {results: state.results.concat({ id: new Date(), value: action.result * 2})})
+                    
                     case actionTypes.DELETE_RESULT:
                         //const id = 2;
                         //const newArray = [...state.results];
 
                         //newArray.splice(id,1)
-                        const updatedArray = state.results.filter(result => result.id !== action.id);
-                       return{
-                           ...state,
-                           results: updatedArray
-                       } 
 
+                      return deleteResult(state, action);
+                       
                  default: return state;
             }
 };

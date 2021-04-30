@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 //import { subtract } from '../../store/actions/actions';
 //import { storeResult } from '../../store/actions/actions';
 //import { deleteResult } from '../../store/actions/actions';
-import * as actionCreators from '../../store/actions/actions';
+import * as actionCreators from '../../store/actions/index';
 // or we could have used 
 //import * from '../../store/actions/actions'
 
